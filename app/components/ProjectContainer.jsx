@@ -35,8 +35,8 @@ const ProjectContainer = ({ services }) => {
     const active = category;
 
     const url = category === "All"
-        ? `http://127.0.0.1:8000/api/projectapi/?page=${page}`
-        : `http://127.0.0.1:8000/api/projectapi/?category=${category}&page=${page}`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/api/projectapi/?page=${page}`
+        : `${process.env.NEXT_PUBLIC_API_URL}/api/projectapi/?category=${category}&page=${page}`;
 
     const { data, error, isLoading, isValidating } = useSWR(url, fetcher, {
         revalidateOnFocus: false,

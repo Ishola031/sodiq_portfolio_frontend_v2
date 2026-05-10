@@ -18,22 +18,6 @@ const roboto = Roboto({
 const ServiceContainer = ({ services }) => {
     const [active, setActive] = useState("All")
 
-    const handleService = async (service) => {
-        try {
-            setProjectLoading(true)
-            const res = await axios.get(`http://127.0.0.1:8000/api/projectapi/?category=${service}`)
-            console.log(res.data)
-            if (res.data) {
-                // setProjects(res.data.results)
-                // setMoreProject(Boolean(res?.data?.next))
-            }
-        } catch (error) {
-
-        } finally {
-            setProjectLoading(false)
-        }
-    };
-
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
         const category = params.get("category")

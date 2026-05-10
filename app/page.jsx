@@ -16,7 +16,7 @@ const roboto = Roboto({
 
 export default async function Home() {
   async function getServices() {
-    const res = await fetch(`http://127.0.0.1:8000/api/serviceapi/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/serviceapi/`, {
       next: {
         revalidate: 60,
       },
