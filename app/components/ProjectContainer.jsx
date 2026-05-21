@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ProgramIcons } from "./ProgramIcons"
 import { Playwrite_DE_SAS } from "next/font/google";
 import { Roboto } from "next/font/google";
 import Link from "next/link";
@@ -8,6 +7,7 @@ import Project from "./Project";
 import { usePathname, useRouter } from "next/navigation";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
+import Loading from "./loading";
 
 const playwrite = Playwrite_DE_SAS({
     weight: ["400"]
@@ -18,14 +18,10 @@ const roboto = Roboto({
     weight: ["400", "500", "700"],
 });
 
-const fetcher = async (url) => {
-    const res = await fetch(url);
-    return res.json();
-};
-
-const ProjectContainer = ({ services }) => {
+const ProjectContainer = ({ services, }) => {
     const [allProjects, setAllProjects] = useState([]);
     const [page, setPage] = useState(1)
+    const [errors, setErrors] = useState(null)
     const pathname = usePathname();
     const isHomePage = pathname === "/"
     const router = useRouter();
@@ -37,6 +33,18 @@ const ProjectContainer = ({ services }) => {
     const url = category === "All"
         ? `${process.env.NEXT_PUBLIC_API_URL}/api/projectapi/?page=${page}`
         : `${process.env.NEXT_PUBLIC_API_URL}/api/projectapi/?category=${category}&page=${page}`;
+
+
+    const fetcher = async (url) => {
+        try {
+            const res = await fetch(url);
+            return res.json();
+        } catch (error) {
+            setErrors("Something Went Wrong, Please try again later.")
+        } finally {
+            setChangingCategory(false)
+        }
+    };
 
     const { data, error, isLoading, isValidating } = useSWR(url, fetcher, {
         revalidateOnFocus: false,
@@ -50,7 +58,12 @@ const ProjectContainer = ({ services }) => {
         setPage(1);
     }, [category]);
 
+    useEffect(() => {
+        console.log(errors)
+    }, [errors]);
+
     if (error) {
+        console.error(`Error -${error?.status}`)
         return (
             <div className="text-red-500 mt-10">
                 Failed to load projects. Please try again.
@@ -65,7 +78,6 @@ const ProjectContainer = ({ services }) => {
     }, [projects]);
 
     useEffect(() => {
-        console.log("hi")
         if (data?.results) {
             setAllProjects(prev => {
                 const ids = new Set(prev.map(p => p.id));
@@ -82,7 +94,7 @@ const ProjectContainer = ({ services }) => {
     return (
         <>
             {/* My Project */}
-            <section className="w-full h-auto py-12 px-22 max-[795px]:px-7.5 bg-white dark:bg-black" id="project">
+            <section id="projects" className={`w-full h-auto ${isHomePage ? 'pt-20' : 'pt-10 pb-10'} pb-0 px-22 max-[795px]:px-7.5 bg-white dark:bg-black`}>
                 <div className="w-full h-full flex flex-col items-center">
                     <h4 className={`${roboto.className} text-[1.5rem] font-medium`}><span className={`${playwrite.className} text-5.5 text-blue-500`}>My</span> Project</h4>
                     <div className="flex flex-wrap justify-center gap-2 my-2.5 mt-2.5">
@@ -96,7 +108,7 @@ const ProjectContainer = ({ services }) => {
                                 }
                             }
                         }} className={`w-auto h-auto py-1 px-3.5  cursor-pointer  rounded-lg text-[14px] ${active === "All" ? "bg-[#333] text-white dark:bg-white dark:text-[#333]" : "bg-white text-[#333] dark:bg-black dark:text-white"}`}>All</button>
-                        {services.map(ser => {
+                        {services?.map(ser => {
                             return (
                                 <button key={`btn-${ser.id}`}
                                     onClick={() => {
@@ -129,10 +141,24 @@ const ProjectContainer = ({ services }) => {
                                 })}
 
                             </>
-                        ) : (!isLoading && !changingCategory && (<p>No Project</p>))}
+                        ) : (!isLoading && !changingCategory && (
+                            errors ? (
+                                <div className="w-full h-100 flex items-center justify-center">
+                                    <p>{errors}</p>
+                                </div>
+                            ) : (
+                                <div className="w-full h-50 flex items-center justify-center">
+                                    <p>No Project</p>
+                                </div>
+                            )
+                        ))}
 
                     </div>
-                    {changingCategory && (<p>Loading</p>)}
+                    {changingCategory && (
+                        <div className="w-full h-50 flex items-center justify-center pt-10">
+                            <Loading />
+                        </div>
+                    )}
                     {!isLoading && data?.next && (
                         isHomePage ? (
                             <Link href="/projects" className="mt-8">View More</Link>

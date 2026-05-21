@@ -36,7 +36,9 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "app/page.jsx",
-    "app/projects/page.jsx"
+    "app/projects/page.jsx",
+    "app/components/Footer.jsx",
+    "app/components/Navbar.jsx"
   ],
   "exclude": [
     "node_modules"

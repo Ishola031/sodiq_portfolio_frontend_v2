@@ -1,10 +1,9 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BsWhatsapp } from "react-icons/bs";
 import { Playwrite_DE_SAS } from "next/font/google";
 import { Roboto } from "next/font/google";
 import axios from 'axios';
-import { param } from 'framer-motion/m';
 
 const playwrite = Playwrite_DE_SAS({
     weight: ["400"]
@@ -56,7 +55,7 @@ const Contact = () => {
 
     return (
         <>
-            <section className="w-full h-auto pb-11 pt-25 px-22 max-[795px]:px-7.5 bg-white dark:bg-black">
+            <section id='contact' className="w-full h-auto pb-11 pt-25 px-22 max-[795px]:px-7.5 bg-white dark:bg-black">
                 <div className="w-full h-full flex flex-col items-center">
                     <h4 className={`text-[1.6rem] text-center font-medium ${playwrite.className} `}>Contact <span className={`text-blue-500 ${roboto.className}`}>Me</span></h4>
                     <div className="w-full flex gap-16 max-[942px]:flex-col max-[942px]:gap-3">

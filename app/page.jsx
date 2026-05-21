@@ -5,6 +5,8 @@ import Hero from "./components/Hero"
 import ServiceContainer from "./components/ServiceProject";
 import ProjectContainer from "./components/ProjectContainer";
 import Contact from "./components/Contact"
+import { Suspense } from "react";
+import Loading from "./components/loading";
 const playwrite = Playwrite_DE_SAS({
   weight: ["400"]
 })
@@ -15,32 +17,35 @@ const roboto = Roboto({
 });
 
 export default async function Home() {
-  async function getServices() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/serviceapi/`, {
-      next: {
-        revalidate: 60,
-      },
-    });
+  var serviceError = null
+  var serviceLoading = false
 
-    return res.json();
+  async function getServices() {
+    try {
+      serviceLoading = true
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/serviceapi/`, {
+        next: {
+          revalidate: 60,
+        },
+      });
+      return res.json();
+    } catch (error) {
+      console.error(error)
+      serviceError = "Something Went Wrong, Please try again later."
+    }
+    finally {
+      serviceLoading = false
+    }
   }
+
   const services = await getServices()
 
-  const handleSubmit = async () => {
-    try {
-
-    } catch (error) {
-
-    } finally {
-
-    }
-  };
   return (
     <>
       <Hero />
 
       {/* EXPERIENCE */}
-      <section className="w-full h-auto py-10 px-22 max-[795px]:pt-40 max-[795px]:px-7.5 bg-white dark:bg-black">
+      <section className="w-full h-auto py-10 px-22 pt-30 max-[795px]:pt-20 max-[795px]:px-7.5 bg-white dark:bg-black">
         <div className="w-full h-full flex flex-col items-center">
           <h4 className="text-[1.5rem] text-center font-bold  text-[#333] dark:text-white">EXPERIENCE</h4>
           <p className={`${playwrite.className} text-[#333] dark:text-white`}>My <span className={`text-blue-500 ${roboto.className}`}>Journey</span></p>
@@ -73,12 +78,14 @@ export default async function Home() {
       </section>
 
       {/* WHAT I DO */}
-      <ServiceContainer services={services} />
+      <ServiceContainer services={services} serviceError={serviceError} serviceLoading={serviceLoading} />
 
-      <ProjectContainer services={services} />
+      <Suspense fallback={<Loading />}>
+        <ProjectContainer services={services} />
+      </Suspense>
 
       {/* What People Say */}
-      <section className="w-full h-auto py-4 px-22 max-[795px]:px-7.5 bg-white dark:bg-black">
+      <section id="testimonial" className="w-full h-auto pt-25 pb-4 px-22 max-[795px]:px-7.5 bg-white dark:bg-black">
         <div className="w-full h-full flex flex-col items-center">
           <h4 className={`text-[1.6rem] text-center font-medium text-[#333] dark:text-white`}>What <span className="text-blue-500">People</span> Say </h4>
           <p className={`${playwrite.className} text-center text-[#333] dark:text-white`}>My <span className={`${roboto.className} text-blue-500`}>Testimonials</span></p>

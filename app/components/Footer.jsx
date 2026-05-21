@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import { RiMenuLine } from "react-icons/ri";
 import Link from 'next/link';
@@ -9,23 +9,46 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { FaArrowUp } from "react-icons/fa";
 
 const Footer = () => {
+    const [show, setShow] = useState(false)
+
+    useEffect(() => {
+        const handlescroll = () => {
+            if (window.scrollY > 500) {
+                setShow(true)
+            } else {
+                setShow(false)
+            }
+        };
+        window.addEventListener("scroll", handlescroll)
+    }, [])
+
+    const backToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        })
+    };
+
     return (
         <footer className='w-full h-auto bg-[#333] text-white py-7.5 px-17.5 text-center flex flex-col items-center justify-center'>
             {/* BACK TO TOP */}
-            <motion.a href=''
-                animate={{
-                    y: [10, 0, 10],
-                    opacity: 1
-                }}
-                transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-                className="fixed bottom-[2.5em] right-[1em] bg-[#333] text-white rounded-xl p-3 py-4 cursor-pointer font-semibold shadow-xl text-[.75em] z-777"
-            >
-                <FaArrowUp />
-            </motion.a>
+            {show && (
+                <motion.p
+                    animate={{
+                        y: [10, 0, 10],
+                        opacity: 1
+                    }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    onClick={backToTop}
+                    className="fixed bottom-[2.5em] right-[1em] bg-[#333] text-white rounded-xl p-3 py-3.5 cursor-pointer font-semibold shadow-xl text-[.75em] z-777 hover:bg-blue-500"
+                >
+                    <FaArrowUp />
+                </motion.p>
+            )}
 
             <div className='w-full h-full flex items-center justify-between mb-4 max-[844px]:flex-col max-[844px]:gap-2'>
                 <div className='max-[844px]:order-1'>
@@ -33,11 +56,11 @@ const Footer = () => {
                 </div>
 
                 <ul className='flex items-center max-[844px]:order-3'>
-                    <li className='mr-4'><Link href="">Home</Link></li>
-                    <li className='mr-5'><Link href="">Services</Link></li>
-                    <li className='mr-4'><Link href="">Project</Link></li>
-                    <li className='mr-4'><Link href="">Testimonial</Link></li>
-                    <li className='mr-4'><Link href="">Contact</Link></li>
+                    <li className='mr-4'><Link href="/#home">Home</Link></li>
+                    <li className='mr-5'><Link href="/#services">Services</Link></li>
+                    <li className='mr-4'><Link href="/#projects">Project</Link></li>
+                    <li className='mr-4'><Link href="/#testimonial">Testimonial</Link></li>
+                    <li className='mr-4'><Link href="/#contact">Contact</Link></li>
                 </ul>
 
                 <div className='max-[844px]:order-2'>
