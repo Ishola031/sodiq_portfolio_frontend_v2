@@ -43,7 +43,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className='fixed top-0 left-0 w-full bg-white text-[#333] dark:bg-black dark:text-white h-auto py-5 px-20 flex items-center justify-between z-999 max-[795px]:px-7.5' style={{ boxShadow: "1px 0px 20px 1px rgba(19,20,20,0.1)" }}>
+        <nav className='fixed top-0 left-0 w-full bg-white text-[#333] dark:bg-black dark:text-white h-auto py-3 px-20 flex items-center justify-between z-999 max-[795px]:px-7.5' style={{ boxShadow: "1px 0px 20px 1px rgba(19,20,20,0.1)" }}>
             <Link href={'/'} className="font-semibold text-[21px] text-(--foreground)">Sanni <span className='text-blue-500'>Sodiq</span></Link>
 
             <div ref={sidebarRef} className={`flex z-999 mb-0 ${showSidebar ? 'right-0' : '-right-full'} max-[728px]:flex-col max-[728px]:top-0 max-[728px]:absolute  max-[728px]:w-[70%] max-[728px]:h-screen  transistion-all duration-500 max-[728px]:bg-[#333]`}>

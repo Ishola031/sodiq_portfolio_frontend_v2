@@ -12,7 +12,7 @@ const Hero = () => {
     return (
         <>
             {/* HERO */}
-            <section id="home" className="w-full h-auto px-22 pt-40 pb-7.5 max-[795px]:pt-30 max-[795px]:px-7.5 bg-white dark:bg-black">
+            <section id="home" className="w-full h-auto px-22 pt-40 pb-7.5 max-[795px]:pt-25 max-[795px]:px-7.5 bg-white dark:bg-black">
                 <div className="w-full h-[80%] max-h-[80%]">
                     <div className="w-full h-full flex items-center gap-10 max-[795px]:flex-col ">
                         <div className="w-[52%] h-full flex flex-col items-start justify-center max-[795px]:order-2 max-[795px]:w-full">
@@ -73,7 +73,7 @@ const Hero = () => {
                             duration: 2,
                             ease: "easeInOut",
                             delay: 0.7,
-                        }} className="relative w-82.5 h-82.5 min-h-62.5 rounded-[50px] bg-[blue] mt-2.5 shadow-2xl max-[795px]:order-1">
+                        }} className="relative w-82.5 h-82.5 min-h-62.5 rounded-[50px] bg-[blue] mt-2.5 shadow-2xl max-[795px]:order-1 max-[795px]:h-78">
                             <Image src="/profile.jpg" alt="My Profile" fill priority className="object-cover rounded-[50px]" />
                         </motion.div>
 

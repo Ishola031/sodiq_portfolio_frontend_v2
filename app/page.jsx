@@ -90,21 +90,21 @@ export default async function Home() {
           <h4 className={`text-[1.6rem] text-center font-medium text-[#333] dark:text-white`}>What <span className="text-blue-500">People</span> Say </h4>
           <p className={`${playwrite.className} text-center text-[#333] dark:text-white`}>My <span className={`${roboto.className} text-blue-500`}>Testimonials</span></p>
           <div className="w-full h-full flex flex-wrap gap-7 justify-center mt-6">
-            <div className="w-87.5 h-57.5 border-2 border-blue-500 border-l-6 rounded-2xl shadow-2xl relative py-6 px-4">
+            <div className="w-87.5 h-auto border-2 border-blue-500 border-l-6 rounded-2xl shadow-2xl relative py-6 px-4">
               <Image src="/testimonial/olao.jpg" alt="" width={20} height={19.5} className="w-20 h-19.5 rounded-[50%] mb-2.5 border-blue-500 border-l-2 border-r-2" />
               <h4 className="text-2xl text-left mb-2.5 font-medium text-[#333] dark:text-white">Kehinde Sanni</h4>
               <p className="text-[13px] text-[#333] dark:text-white">Sodiq built a functional and attractive web app for our business. He’s creative, reliable, and
                 delivers exactly what he promises.</p>
 
             </div>
-            <div className="w-87.5 h-57.5 border-2 border-blue-500 border-l-6 rounded-2xl shadow-2xl relative py-6 px-4">
-              <img src="/testimonial/saheed.jpg" alt="" width={20} height={19.5} className="w-20 h-19.5 rounded-[50%] mb-2.5 border-blue-500 border-l-2 border-r-2" />
+            <div className="w-87.5 h-auto border-2 border-blue-500 border-l-6 rounded-2xl shadow-2xl relative py-6 px-4">
+              <Image src="/testimonial/saheed.jpg" alt="" width={20} height={19.5} className="w-20 h-19.5 rounded-[50%] mb-2.5 border-blue-500 border-l-2 border-r-2" />
               <h4 className="text-2xl text-left mb-2.5 font-medium text-[#333] dark:text-white">Saheed Olatunji</h4>
               <p className="text-[13px] text-[#333] dark:text-white">He nailed our logo design perfectly. Creative and easy to work with.</p>
 
             </div>
-            <div className="w-87.5 h-57.5 border-2 border-blue-500 border-l-6 rounded-2xl shadow-2xl relative py-6 px-4">
-              <img src="/testimonial/isila.jpg" alt="" width={20} height={19.5} className="w-20 h-19.5 rounded-[50%] mb-2.5 border-blue-500 border-l-2 border-r-2" />
+            <div className="w-87.5 h-auto border-2 border-blue-500 border-l-6 rounded-2xl shadow-2xl relative py-6 px-4">
+              <Image src="/testimonial/isila.jpg" alt="" width={20} height={19.5} className="w-20 h-19.5 rounded-[50%] mb-2.5 border-blue-500 border-l-2 border-r-2" />
               <h4 className="text-2xl text-left mb-2.5 font-medium text-[#333] dark:text-white">Isilamiyah Sanni</h4>
               <p className="text-[13px] text-[#333] dark:text-white">He handled our branding and website from start to finish — flawless work.</p>
 

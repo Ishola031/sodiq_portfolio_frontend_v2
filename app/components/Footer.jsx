@@ -55,7 +55,7 @@ const Footer = () => {
                     <h4 className='capitalize font-medium text-[1.5rem]'>Sanni <span className='text-blue-500'>Sodiq</span></h4>
                 </div>
 
-                <ul className='flex items-center max-[844px]:order-3'>
+                <ul className='flex items-center max-[844px]:order-3 max-[420px]:hidden'>
                     <li className='mr-4'><Link href="/#home">Home</Link></li>
                     <li className='mr-5'><Link href="/#services">Services</Link></li>
                     <li className='mr-4'><Link href="/#projects">Project</Link></li>
