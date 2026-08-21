@@ -5,6 +5,7 @@ import { Playwrite_DE_SAS } from "next/font/google";
 import { Roboto } from "next/font/google";
 import Link from "next/link";
 import Loading from "./loading";
+import { useServices } from "../hooks/useService";
 
 const playwrite = Playwrite_DE_SAS({
     weight: ["400"]
@@ -15,8 +16,9 @@ const roboto = Roboto({
     weight: ["400", "500", "700"],
 });
 
-const ServiceContainer = ({ services, serviceError, serviceLoading }) => {
+const ServiceContainer = () => {
     const [active, setActive] = useState("All")
+    const { data: services, error: serviceError, isFetching: serviceLoading } = useServices()
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -25,6 +27,7 @@ const ServiceContainer = ({ services, serviceError, serviceLoading }) => {
             setActive(category)
         }
     }, [])
+
     return (
         <>
             <section id="services" className="w-full h-auto pb-0 pt-25 px-22 max-[795px]:px-7.5 bg-white dark:bg-black">

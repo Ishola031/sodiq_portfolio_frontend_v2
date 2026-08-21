@@ -32,10 +32,11 @@ const Project = ({ project }) => {
                     {project.program.length > 0 && (
                         project.program.map(pgm => {
                             const iconKey = pgm.icon
-                            const Icon =
-                                ProgramIcons[iconKey]
+                            const Icon = ProgramIcons[iconKey]
                             return (
-                                <div key={`pjpgm-${pgm.id}`} className={`w-auto h-auto py-1 px-2  cursor-pointer  rounded-lg text-[14px] bg-[#333] text-white flex gap-1 items-center dark:bg-white dark:text-[#333]`}><Icon className="text-[19px]" /> {pgm.name}</div>
+                                <div key={`pjpgm-${pgm.id}`} className={`w-auto h-auto py-1 px-2  cursor-pointer  rounded-lg text-[14px] bg-[#333] text-white flex gap-1 items-center dark:bg-white dark:text-[#333]`}>
+                                    <Icon className="text-[19px]" /> {pgm.name}
+                                </div>
                             )
                         })
                     )}
